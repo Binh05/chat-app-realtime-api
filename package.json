@@ -1,0 +1,23 @@
+{
+  "name": "chat-app-realtime-api",
+  "version": "1.0.0",
+  "description": "chat app realtime",
+  "keywords": [
+    "chat",
+    "app",
+    "real",
+    "time"
+  ],
+  "license": "ISC",
+  "author": "Binh05",
+  "type": "module",
+  "main": "src/server.ts",
+  "scripts": {
+    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1"
+  }
+}
