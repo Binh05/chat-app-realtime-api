@@ -1,36 +1,43 @@
-import express from 'express'
-import http from 'http'
-import { Server } from 'socket.io'
+import express from "express";
+import http from "http";
+import { Server } from "socket.io";
 
-const app = express()
-const server = http.createServer(app)
+const app = express();
+const server = http.createServer(app);
 
 const io = new Server(server, {
-    cors: {
-        origin: "*",
-    },
-})
+  cors: {
+    origin: "*",
+  },
+});
 
-const hostname = 'localhost'
-const port = 5000
+const hostname = "localhost";
+const port = 5000;
 
-app.get('/', (req, res) => {
-    res.send('Hello Binh with socket.io')
-})
+app.get("/", (req, res) => {
+  res.send("Hello Binh with socket.io");
+});
 
-io.on("connection", socket => {
-    console.log("a user connected: " + socket.id)
+io.on("connection", (socket) => {
+  console.log("✅ A user connected:", socket.id);
 
-    socket.on("disconnected", () => {
-        console.log("user disconnected: " + socket.id)
-    })
+  // Lắng nghe tin nhắn từ client
+  socket.on("chatMessage", (msg) => {
+    console.log("💬 Message from client:", msg);
 
-    socket.on("send_message", (data) => {
-        console.log("message: ", data)
-        io.emit("receive_message", data)
-    })
-})
+    // Gửi lại cho client
+    socket.emit("chatMessage", `Server nhận: ${msg}`);
+  });
 
-app.listen(port, hostname, () => {
-    console.log(`server is running at http://${hostname}:${port}`)
+  socket.on("disconnect", () => {
+    console.log("❌ A user disconnected:", socket.id);
+  });
+});
+
+// app.listen(port, hostname, () => {
+//   console.log(`server is running at http://${hostname}:${port}`);
+// });
+
+server.listen(5000, () => {
+  console.log(`server is running at http://${hostname}:${port}`);
 })
