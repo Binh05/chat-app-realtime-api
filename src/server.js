@@ -1,6 +1,7 @@
 import express from "express";
 import http from "http";
 import { Server } from "socket.io";
+import { Route_V1 } from "./routes/v1/index.js";
 
 const app = express();
 const server = http.createServer(app);
@@ -17,6 +18,10 @@ const port = 5000;
 app.get("/", (req, res) => {
   res.send("Hello Binh with socket.io");
 });
+
+app.use('/v1', Route_V1)
+
+app.use('/v1', Route_V1)
 
 io.on("connection", (socket) => {
   console.log("✅ A user connected:", socket.id);
