@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
   res.send("Hello Binh with socket.io");
 });
 
-app.use('/v1', Route_V1)
+app.use('/', express.json())
 
 app.use('/v1', Route_V1)
 
