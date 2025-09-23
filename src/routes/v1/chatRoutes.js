@@ -1,13 +1,17 @@
-import express from 'express'
-import { chatValidation } from '../../validations/chatValidation.js'
-import { chatController } from '../../controllers/chatController.js'
+import express from "express";
+import { chatValidation } from "../../validations/chatValidation.js";
+import { chatController } from "../../controllers/chatController.js";
 
-const Router = express.Router()
+const Router = express.Router();
 
-Router.route('/')
+Router.route("/")
   .get((req, res) => {
-    res.status(200).json({ message: 'get chat router' })
+    res.status(200).json({ message: "get v1 chat router" });
   })
-  .post(chatValidation.createNewChat, chatController.createNewChat)
+  .post(chatValidation.createNewChat, chatController.createNewChat);
 
-export const Route_chat = Router
+Router.route("/old").get((req, res) =>
+  res.status(200).json({ message: "get v1 old chat route" })
+);
+
+export const Route_chat = Router;

@@ -11,9 +11,10 @@
   "license": "ISC",
   "author": "Binh05",
   "type": "module",
-  "main": "src/server.ts",
+  "main": "src/server.js",
   "scripts": {
-    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+    "test": "echo \\\"Error: no test specified\\\" && exit 1",
+    "dev": "nodemon src/server.js"
   },
   "dependencies": {
     "express": "^5.1.0",
@@ -23,6 +24,7 @@
   },
   "devDependencies": {
     "@types/socket.io": "^3.0.1",
-    "@types/socket.io-client": "^1.4.36"
+    "@types/socket.io-client": "^1.4.36",
+    "nodemon": "^3.1.10"
   }
 }

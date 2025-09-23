@@ -2,6 +2,7 @@ import express from "express";
 import http from "http";
 import { Server } from "socket.io";
 import { Route_V1 } from "./routes/v1/index.js";
+import { errorHandlingMiddleware } from "./middlewares/errorHandlingMiddleware.js";
 
 const app = express();
 const server = http.createServer(app);
@@ -19,9 +20,12 @@ app.get("/", (req, res) => {
   res.send("Hello Binh with socket.io");
 });
 
-app.use('/', express.json())
+app.use("/", express.json());
 
-app.use('/v1', Route_V1)
+app.use("/v1", Route_V1);
+
+// middlware error global
+app.use(errorHandlingMiddleware);
 
 io.on("connection", (socket) => {
   console.log("✅ A user connected:", socket.id);
@@ -45,4 +49,4 @@ io.on("connection", (socket) => {
 
 server.listen(5000, () => {
   console.log(`server is running at http://${hostname}:${port}`);
-})
+});
